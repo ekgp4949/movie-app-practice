@@ -3,21 +3,21 @@ import React from "react";
 class App extends React.Component {
 
   state = {
-    count: 9
+    isLoading: true,
+    movies: []
   }
 
-  componentDidMount() {}
-
-  add = () => this.setState(current => ({count: current.count+1}) );
-
-  minus = () => this.setState(current => ({count: current.count-1}) );
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ isLoading : false, movies: [1,2,3,4,5,6] })
+    }, 3000);
+  }
 
   render() {
+    const { isLoading } = this.state;
     return (
       <div>
-        <h1>hihi: { this.state.count }</h1>
-        <button onClick={this.add}>Add</button>
-        <button onClick={this.minus}>Minus</button>
+        {isLoading ? 'Loading....' : this.state.movies.map(item => <div>Movie{item}</div>)}
       </div>
     );
   }
